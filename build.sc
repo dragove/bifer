@@ -5,7 +5,7 @@ trait CommonModule extends ScalaModule {
   def scalacOptions = Seq("-language:experimental.erasedDefinitions")
 }
 
-object scoref extends CommonModule {
+object bifer extends CommonModule {
   def ivyDeps = Agg(
     ivy"com.wz7982::sqala-dsl:0.0.2",
     ivy"com.softwaremill.sttp.tapir::tapir-core:1.11.2"

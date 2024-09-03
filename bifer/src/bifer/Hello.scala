@@ -1,4 +1,4 @@
-package scoref
+package bifer
 import sqala.dsl.*
 import sqala.printer.PostgresqlDialect
 
