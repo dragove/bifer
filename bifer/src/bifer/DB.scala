@@ -16,6 +16,6 @@ object DB {
   config.addDataSourceProperty("cachePrepStmts", "true")
   config.addDataSourceProperty("prepStmtCacheSize", "250")
   config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048")
-  private val ds = HikariDataSource(config)
+  val ds = HikariDataSource(config)
   val db = JdbcContext(ds, PostgresqlDialect)
 }
