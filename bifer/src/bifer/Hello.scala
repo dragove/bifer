@@ -16,19 +16,26 @@ import bifer.DB.ds
 import sqala.jdbc.JdbcContext
 import org.postgresql.Driver
 
-case class User(name: String, category: String, `type`: String, amount: BigDecimal)
+case class User(
+    name: String,
+    category: String,
+    `type`: String,
+    amount: BigDecimal
+)
 def fetch() =
-  val q = query[User].map(x => (name = x.name, category = x.category))
+  val q = queryContext {
+    val subQuery = query[User].filter(_.name == "Dove").map(_.name).take(1)
+    query[User].filter(_.name == subQuery)
+  }
+  println(q.sql(PostgresqlDialect)(0))
   db.fetch(q)
 
-
 def fetch3() =
-  db.fetch(query[User].groupBy(_.category)
-    .map((category, user) => (category, sum(user.amount))))
+  db.fetch(
+    query[User]
+      .groupBy(_.category)
+      .map((category, user) => (category, sum(user.amount)))
+  )
 
 @main def main: Unit =
-  val x = (age = 12, name = "Dove")
-  println(x.age)
-  for user <- fetch() do print(s"name: ${user.name};")
-  println()
-  for r <- fetch3() do println(s"cat: ${r(0)}, amount: ${r(1)}")
+  fetch()
