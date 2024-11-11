@@ -1,17 +1,15 @@
 import mill._, scalalib._
 
 trait CommonModule extends ScalaModule {
-  def scalaVersion = "3.5.0"
+  def scalaVersion = "3.6.1"
   def scalacOptions = Seq("-language:experimental.erasedDefinitions")
 }
 
 object bifer extends CommonModule {
-  val sqalaVersion = "0.0.23"
+  val sqalaVersion = "0.0.39"
   def ivyDeps = Agg(
     ivy"com.wz7982::sqala-dsl:$sqalaVersion",
-    ivy"com.wz7982::sqala-dsl-ext:$sqalaVersion",
     ivy"com.wz7982::sqala-jdbc:$sqalaVersion",
-    ivy"com.wz7982::sqala-jdbc-ext:$sqalaVersion",
     ivy"com.wz7982::sqala-dynamic:$sqalaVersion",
     ivy"com.softwaremill.sttp.tapir::tapir-core:1.11.2",
 
