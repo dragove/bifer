@@ -1,7 +1,6 @@
 package bifer
 
 import sqala.jdbc.*
-import javax.sql.DataSource
 import sqala.printer.PostgresqlDialect
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
