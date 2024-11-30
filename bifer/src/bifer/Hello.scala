@@ -6,12 +6,17 @@ import bifer.DB.db
 import sqala.dsl.statement.query.SelectQuery
 import sqala.printer.PostgresqlDialect
 import java.util.Arrays
+import sqala.dsl.annotation.autoInc
+import sqala.dsl.annotation.primaryKey
 
 extension (exprS: Expr[String])
   def len = length(exprS)
   def toUp = upper(exprS)
 
 case class User(
+    @primaryKey
+    @autoInc
+    id: Option[Long],
     name: String,
     email: String,
     category: String,
@@ -32,4 +37,12 @@ def fetchUser(email: String) =
   db.fetch(q).head
 
 @main def main: Unit =
+  db.execute(
+    insert(
+      List(
+        User(None, "a", "b", "c", "d", 1.0, false),
+        User(None, "a", "b", "c", "d", 1.0, false)
+      )
+    )
+  )
   fetchUser("dove@qq.com")
