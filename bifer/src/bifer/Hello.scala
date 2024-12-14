@@ -6,6 +6,7 @@ import bifer.DB.db
 import sqala.printer.PostgresqlDialect
 import java.util.Arrays
 import sqala.static.annotation.*
+import sqala.data.json.toJson
 
 case class User(
     @primaryKey
@@ -32,5 +33,5 @@ def fetchUser(email: String) =
   val x = (name = "hi", age = 10)
   println(x.age)
   val u = fetchUser("dove@qq.com")
-  println(u.name)
+  println(u.toJson)
 
