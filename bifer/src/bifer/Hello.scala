@@ -1,36 +1,26 @@
 package bifer
 
+import sqala.metadata.*
 import sqala.static.dsl.*
+import sqala.jdbc.*
 import bifer.DB.db
-import sqala.printer.PostgresqlDialect
-import java.util.Arrays
-import sqala.static.annotation.*
 import sqala.data.json.toJson
+import java.time.LocalDate
+import sqala.data.json.JsonDateFormat
 
+@table("users")
 case class User(
-    @primaryKey
     @autoInc
     id: Long,
     name: String,
-    email: String,
-    category: String,
-    `type`: String,
-    amount: BigDecimal,
-    deleted: Boolean
+    sex: String,
+    birthday: LocalDate
 )
 
-def fetchUser(email: String) =
-  val q = queryContext:
-    query[User]
-      .filter(_.email == email)
-  val sql = q.sql(PostgresqlDialect)
-  println(sql(0))
-  println(Arrays.toString(sql(1)))
-  db.fetch(q).head
+def fetchUser(name: String) =
+  db.fetch(from[User]).headOption
 
 @main def main: Unit =
-  val x = (name = "hi", age = 10)
-  println(x.age)
-  val u = fetchUser("dove@qq.com")
+  given JsonDateFormat("yyyy-MM-dd")
+  val u = fetchUser("dragon")
   println(u.toJson)
-
