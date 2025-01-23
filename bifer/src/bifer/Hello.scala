@@ -1,7 +1,6 @@
 package bifer
 
 import sqala.static.dsl.*
-import sqala.jdbc.*
 import bifer.DB.db
 import sqala.printer.PostgresqlDialect
 import java.util.Arrays
