@@ -15,7 +15,7 @@ trait CommonModule extends ScalaModule {
 }
 
 object bifer extends CommonModule {
-  val sqalaVersion = "0.2.20"
+  val sqalaVersion = "0.2.21"
   def ivyDeps = Agg(
     ivy"com.wz7982::sqala-data:$sqalaVersion",
     ivy"com.wz7982::sqala-jdbc:$sqalaVersion",
